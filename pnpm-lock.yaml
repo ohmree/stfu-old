@@ -9,7 +9,6 @@ importers:
     specifiers:
       '@d-fischer/qs': ^7.0.2
       '@fortawesome/free-brands-svg-icons': ^5.15.4
-      '@ohmree/solid-twitch-auth': link:/home/ohmree/code/js/solid-twitch-auth
       '@tauri-apps/api': ^1.0.0-beta.8
       '@twurple/api': ^5.0.4
       '@twurple/auth': ^5.0.4
@@ -35,7 +34,6 @@ importers:
     dependencies:
       '@d-fischer/qs': 7.0.2
       '@fortawesome/free-brands-svg-icons': 5.15.4
-      '@ohmree/solid-twitch-auth': link:../../../solid-twitch-auth
       '@tauri-apps/api': 1.0.0-beta.8
       '@twurple/pubsub': 5.0.4_@twurple+auth@5.0.4
       solid-app-router: 0.1.7_solid-js@1.1.5
