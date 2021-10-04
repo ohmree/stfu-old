@@ -1,21 +1,11 @@
-import {event} from '@tauri-apps/api';
 import './app.css';
 
 const js = document.querySelector('#javascript')!;
-if (window.__TAURI__) {
-    const hash = document.location.hash.substr(1);
-    const token = hash?.match(/.*access_token=([^#&]+)&/)?.[1];
-    if (token) {
-        js.className = '';
-        document.location.replace(`${document.location.pathname}#token_retrieved`);
-        event.emit('stfu://token', token);
-    } else if (hash === 'token_retrieved') {
-        js.innerHTML = 'You will be redirected in a moment, STFU!';
-    } else {
-        js.innerHTML = 'Error: Access Token not found.';
-    }
+const hash = document.location.hash.substr(1);
+js.className = '';
+if (hash) {
+  js.innerHTML = 'Redirecting...STFU!';
+  document.location.replace(`stfu://${hash}`);
 } else {
-    document.location.replace(`${document.location.pathname}#no_tauri`);
-    js.className = '';
-    js.innerHTML = 'Error: This page only works in the STFU companion app.';
+  js.innerHTML = 'Error: Access Token not found.';
 }
