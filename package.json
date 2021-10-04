@@ -1,0 +1,32 @@
+{
+  "name": "stfu",
+  "version": "0.0.1",
+  "xo": {
+    "space": true,
+    "prettier": true,
+    "overrides": [
+      {
+        "files": "packages/app/src/**/*.ts{,x}",
+        "plugins": [
+          "solid"
+        ],
+        "extends": "plugin:solid/recommended",
+        "rules": {
+          "@typescript-eslint/dot-notation": [
+            "error",
+            {
+              "allowIndexSignaturePropertyAccess": true
+            }
+          ]
+        }
+      }
+    ],
+    "settings": {
+      "import/resolver": {
+        "typescript": {
+          "alwaysTryTypes": true
+        }
+      }
+    }
+  }
+}

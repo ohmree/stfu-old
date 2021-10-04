@@ -1,0 +1,64 @@
+{
+  "name": "@stfu/app",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite-tauri dev",
+    "build": "vite-tauri build",
+    "lint": "xo",
+    "fix": "xo --fix"
+  },
+  "devDependencies": {
+    "@twurple/api": "^5.0.4",
+    "@twurple/auth": "^5.0.4",
+    "babel-preset-solid": "^1.1.5",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-solid": "^0.1.2",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.3",
+    "vite": "^2.5.10",
+    "vite-plugin-solid": "^2.0.3",
+    "vite-plugin-tauri": "^0.1.3",
+    "vite-plugin-windicss": "^1.4.7",
+    "windicss": "^3.1.8",
+    "xo": "^0.44.0"
+  },
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@tauri-apps/api": "^1.0.0-beta.8",
+    "@twurple/pubsub": "^5.0.4",
+    "solid-app-router": "^0.1.7",
+    "solid-fa": "^0.0.4",
+    "solid-js": "^1.1.5",
+    "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store",
+    "tauri-settings": "^0.1.1"
+  },
+  "xo": {
+    "space": true,
+    "prettier": true,
+    "overrides": [
+      {
+        "files": "packages/app/src/**/*.ts{,x}",
+        "plugins": [
+          "solid"
+        ],
+        "extends": "plugin:solid/recommended",
+        "rules": {
+          "@typescript-eslint/dot-notation": [
+            "error",
+            {
+              "allowIndexSignaturePropertyAccess": true
+            }
+          ]
+        }
+      }
+    ],
+    "settings": {
+      "import/resolver": {
+        "typescript": {
+          "alwaysTryTypes": true
+        }
+      }
+    }
+  }
+}

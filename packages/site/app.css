@@ -1,0 +1,12 @@
+body {
+    text-align: center;
+    background-color: #FFF;
+    max-width: 500px;
+    margin: auto;
+}
+noscript {
+    color: red;
+}
+.hide {
+    display: none;
+}
