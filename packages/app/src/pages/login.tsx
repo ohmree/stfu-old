@@ -2,9 +2,29 @@ import type {Component} from 'solid-js';
 import {Fa} from 'solid-fa';
 import {faTwitch} from '@fortawesome/free-brands-svg-icons';
 import * as tauri from '@tauri-apps/api';
+import useSettings from '../hooks/settings';
+import {stringify} from '@d-fischer/qs';
 
+interface AuthorizeParams {
+	response_type: string;
+	client_id: string;
+	redirect_uri: string;
+	scope: string;
+	force_verify?: boolean;
+}
 const Login: Component = () => {
   let authPopup: tauri.window.WebviewWindow | null | undefined;
+  const settings = useSettings();
+  const queryParams: AuthorizeParams = {
+    response_type: 'token',
+    client_id: import.meta.env.VITE_TWITCH_CLIENT_ID! as string,
+    redirect_uri: import.meta.env.VITE_TWITCH_REDIRECT_URL! as string,
+    scope: '', /* FIXME */
+    force_verify: false /* FIXME */
+  };
+  const authUrl = `https://id.twitch.tv/oauth2/authorize${stringify(queryParams, { addQueryPrefix: true })}`;
+
+
   return (
     <div
       pos="relative top-2/5"
@@ -41,8 +61,20 @@ const Login: Component = () => {
                 alwaysOnTop: true,
                 focus: true,
                 title: 'Sign in with Twitch',
-                url: 'https://example.com',
+                url: authUrl
               });
+              authPopup.once(
+                'stfu://token',
+                (event) => {
+                  const accessToken = event.payload as string;
+                  settings.setToken({
+                    accessToken,
+                    refreshToken: null,
+                    expiresIn: null,
+                    scope: [], /* FIXME */
+                    obtainmentTimestamp: Date.now()
+                  });
+                });
             }
           }}
         >

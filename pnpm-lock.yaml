@@ -7,7 +7,9 @@ importers:
 
   packages/app:
     specifiers:
+      '@d-fischer/qs': ^7.0.2
       '@fortawesome/free-brands-svg-icons': ^5.15.4
+      '@ohmree/solid-twitch-auth': link:/home/ohmree/code/js/solid-twitch-auth
       '@tauri-apps/api': ^1.0.0-beta.8
       '@twurple/api': ^5.0.4
       '@twurple/auth': ^5.0.4
@@ -19,6 +21,7 @@ importers:
       solid-app-router: ^0.1.7
       solid-fa: ^0.0.4
       solid-js: ^1.1.5
+      solid-zustand: ^1.0.9
       tauri-plugin-store-api: github:tauri-apps/tauri-plugin-store
       tauri-settings: ^0.1.1
       typescript: ^4.4.3
@@ -28,15 +31,20 @@ importers:
       vite-plugin-windicss: ^1.4.7
       windicss: ^3.1.8
       xo: ^0.44.0
+      zustand: ^3.5.12
     dependencies:
+      '@d-fischer/qs': 7.0.2
       '@fortawesome/free-brands-svg-icons': 5.15.4
+      '@ohmree/solid-twitch-auth': link:../../../solid-twitch-auth
       '@tauri-apps/api': 1.0.0-beta.8
       '@twurple/pubsub': 5.0.4_@twurple+auth@5.0.4
       solid-app-router: 0.1.7_solid-js@1.1.5
       solid-fa: 0.0.4_solid-js@1.1.5
       solid-js: 1.1.5
+      solid-zustand: 1.0.9
       tauri-plugin-store-api: github.com/tauri-apps/tauri-plugin-store/16e1f5721b63ddd0b34fa0020b3c05cc8e4f6d58
       tauri-settings: 0.1.1
+      zustand: 3.5.12
     devDependencies:
       '@twurple/api': 5.0.4_@twurple+auth@5.0.4
       '@twurple/auth': 5.0.4
@@ -452,7 +460,6 @@ packages:
   /@d-fischer/qs/7.0.2:
     resolution: {integrity: sha512-yAu3xDooiL+ef84Jo8nLjDjWBRk7RXk163Y6aTvRB7FauYd3spQD/dWvgT7R4CrN54Juhrrc3dMY7mc+jZGurQ==}
     engines: {node: '>=0.6'}
-    dev: true
 
   /@d-fischer/rate-limiter/0.4.5:
     resolution: {integrity: sha512-Q6TSDCbQcHShZAmX7UqG4ipPLjedAE2N5eV+30tr9c3QrejE5zTlNVY6CyX2bydXu+tVKmsajFix89ydpc9fWA==}
@@ -3851,6 +3858,14 @@ packages:
       solid-js: 1.1.5
     dev: true
 
+  /solid-zustand/1.0.9:
+    resolution: {integrity: sha512-a7GEpHM2ZooK1W3h126ssQ3w98ewgFguUFTxeaEVuBpvaPleAMFQxRDdyF8FFt3YwrQQrOmAHYpkpiQZl5xLrA==}
+    dependencies:
+      zustand: 3.5.12
+    transitivePeerDependencies:
+      - react
+    dev: false
+
   /source-map-js/0.6.2:
     resolution: {integrity: sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==}
     engines: {node: '>=0.10.0'}
@@ -4399,6 +4414,16 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zustand/3.5.12:
+    resolution: {integrity: sha512-Cv9fX/yM5HXYODkn3Q/HMmMofnmZw3yqM73VT/3rQEvI/04Yl0OFNO24qMofhN82xTPWcCffkGPFCMq8r67Whg==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      react: '>=16.8'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dev: false
 
   github.com/tauri-apps/tauri-plugin-store/16e1f5721b63ddd0b34fa0020b3c05cc8e4f6d58:
     resolution: {tarball: https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/16e1f5721b63ddd0b34fa0020b3c05cc8e4f6d58}

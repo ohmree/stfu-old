@@ -13,7 +13,6 @@ declare module 'solid-js' {
 
 interface ImportMetaEnv extends Readonly<Record<string, string>> {
   readonly VITE_TWITCH_CLIENT_ID: string;
-  readonly VITE_TWITCH_CLIENT_SECRET: string;
   readonly VITE_TWITCH_REDIRECT_URL: string;
 }
 

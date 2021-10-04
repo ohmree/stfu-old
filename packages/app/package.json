@@ -25,14 +25,18 @@
     "xo": "^0.44.0"
   },
   "dependencies": {
+    "@d-fischer/qs": "^7.0.2",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@ohmree/solid-twitch-auth": "link:/home/ohmree/code/js/solid-twitch-auth",
     "@tauri-apps/api": "^1.0.0-beta.8",
     "@twurple/pubsub": "^5.0.4",
     "solid-app-router": "^0.1.7",
     "solid-fa": "^0.0.4",
     "solid-js": "^1.1.5",
+    "solid-zustand": "^1.0.9",
     "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store",
-    "tauri-settings": "^0.1.1"
+    "tauri-settings": "^0.1.1",
+    "zustand": "^3.5.12"
   },
   "xo": {
     "space": true,
