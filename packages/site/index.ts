@@ -7,7 +7,7 @@ if (window.rpc) {
     const token = hash?.match(/.*access_token=([^#&]+)&/)?.[1];
     if (token) {
         js.className = '';
-        document.location.replace('/#token_retrieved');
+        document.location.replace('/stfu/#token_retrieved');
         event.emit('stfu://token', token);
     } else if (hash === 'token_retrieved') {
         js.innerHTML = 'You will be redirected in a moment, STFU!';
@@ -16,7 +16,7 @@ if (window.rpc) {
     }
 } else {
     console.debug(js);
-    document.location.replace('/#no_tauri');
+    document.location.replace('/stfu/#no_tauri');
     js.className = '';
     js.innerHTML = 'Error: This page only works in the STFU companion app.';
 }
