@@ -60,8 +60,8 @@ const Login: Component = () => {
             tauri.event.once(
               'stfu://token',
               ({payload}) => {
-                console.debug(payload);
                 window.location.replace(oldLocation);
+                console.debug(payload);
                 const fragment: {
                   access_token: string;
                   scope: string;
