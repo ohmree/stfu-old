@@ -13,7 +13,6 @@ interface AuthorizeParams {
 	force_verify?: boolean;
 }
 const Login: Component = () => {
-  let authPopup: tauri.window.WebviewWindow | null | undefined;
   const settings = useSettings();
   const queryParams: AuthorizeParams = {
     response_type: 'token',
@@ -56,40 +55,30 @@ const Login: Component = () => {
           border="rounded-md"
           outline="focus:none"
           onClick={() => {
-            if (!authPopup) {
-              authPopup = new tauri.window.WebviewWindow('twitch-auth', {
-                alwaysOnTop: true,
-                focus: true,
-                title: 'Sign in with Twitch',
-                url: authUrl
-              });
-              tauri.event.once(
-                'stfu://token',
-                ({payload}) => {
-                  console.debug(payload);
-                  authPopup?.close();
-                  const fragment: {
-                    access_token: string;
-                    scope: string;
-                    state?: string;
-                    token_type: 'bearer';
-                  } = parse(payload as string);
+            const oldLocation = window.location.href;
+            window.location.replace(authUrl);
+            tauri.event.once(
+              'stfu://token',
+              ({payload}) => {
+                console.debug(payload);
+                window.location.replace(oldLocation);
+                const fragment: {
+                  access_token: string;
+                  scope: string;
+                  state?: string;
+                  token_type: 'bearer';
+                } = parse(payload as string);
 
-                  console.debug(fragment);
-
-                  const {access_token: accessToken} = fragment;
-                  const scope = fragment.scope.split(' ');
-                  console.debug(accessToken);
-                  console.debug(scope);
-                  settings.setToken({
-                    accessToken,
-                    refreshToken: null,
-                    expiresIn: null,
-                    scope,
-                    obtainmentTimestamp: Date.now()
-                  });
+                const {access_token: accessToken} = fragment;
+                const scope = fragment.scope.split(' ');
+                settings.setToken({
+                  accessToken,
+                  refreshToken: null,
+                  expiresIn: null,
+                  scope,
+                  obtainmentTimestamp: Date.now()
                 });
-            }
+              });
           }}
         >
           <Fa icon={faTwitch} w="4" h="4" m="x-2" />
