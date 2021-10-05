@@ -3,7 +3,7 @@ import {Fa} from 'solid-fa';
 import {faTwitch} from '@fortawesome/free-brands-svg-icons';
 import * as tauri from '@tauri-apps/api';
 import useSettings from '../hooks/settings';
-import {stringify} from '@d-fischer/qs';
+import {parse, stringify} from '@d-fischer/qs';
 
 interface AuthorizeParams {
 	response_type: string;
@@ -63,15 +63,29 @@ const Login: Component = () => {
                 title: 'Sign in with Twitch',
                 url: authUrl
               });
-              authPopup.once(
+              tauri.event.once(
                 'stfu://token',
-                (event) => {
-                  const accessToken = event.payload as string;
+                ({payload}) => {
+                  console.debug(payload);
+                  authPopup?.close();
+                  const fragment: {
+                    access_token: string;
+                    scope: string;
+                    state?: string;
+                    token_type: 'bearer';
+                  } = parse(payload as string);
+
+                  console.debug(fragment);
+
+                  const {access_token: accessToken} = fragment;
+                  const scope = fragment.scope.split(' ');
+                  console.debug(accessToken);
+                  console.debug(scope);
                   settings.setToken({
                     accessToken,
                     refreshToken: null,
                     expiresIn: null,
-                    scope: [], /* FIXME */
+                    scope,
                     obtainmentTimestamp: Date.now()
                   });
                 });
