@@ -29,7 +29,6 @@ tauri-plugin-store = { git = "https://github.com/tauri-apps/tauri-plugin-store" 
 
 [patch.crates-io]
 tauri = { git = "https://github.com/tauri-apps/tauri", branch = "next" }
-wry = { git = "https://github.com/tauri-apps/wry", branch = "next" }
 
 [features]
 default = ["custom-protocol", "tauri/api-all"]
