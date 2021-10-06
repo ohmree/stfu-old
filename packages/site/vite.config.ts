@@ -5,6 +5,6 @@ export default defineConfig({
   plugins: [htmlMinimize()],
   base: '/stfu/',
   server: {
-    port: 4000
-  }
-})
+    port: 4000,
+  },
+});

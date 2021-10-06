@@ -2,17 +2,17 @@ import {event, tauri} from '@tauri-apps/api';
 import './app.css';
 
 const js = document.querySelector('#javascript')!;
-window.tauri = tauri;
-window.tauriEvent = event;
 js.className = '';
 if (window.rpc) {
-  const hash = document.location.hash.substr(1);
+  const hash = document.location.hash.slice(1);
   if (hash) {
     js.innerHTML = 'You will be redirected in a moment, STFU!';
-    event.once('stfu://navigate', ({payload: url}) => document.location.replace(url as string));
-    event.emit('stfu://token', hash);
-    tauri.invoke('restore_location');
-    // document.location.replace(`${document.location.pathname}#token_retrieved`);
+    void event.once('stfu://navigate', ({payload: url}) => {
+      document.location.replace(url as string);
+    });
+    void event.emit('stfu://token', hash);
+    void tauri.invoke('restore_location');
+    // Document.location.replace(`${document.location.pathname}#token_retrieved`);
   } else {
     js.innerHTML = 'Error: Access Token not found.';
   }

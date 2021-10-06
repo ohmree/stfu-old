@@ -1,6 +1,14 @@
 {
   "name": "stfu",
   "version": "0.0.1",
+  "scripts": {
+    "dev": "pnpm m run dev",
+    "lint": "xo",
+    "fix": "xo --fix"
+  },
+  "devDependencies": {
+    "xo": "^0.44.0"
+  },
   "xo": {
     "space": true,
     "prettier": true,

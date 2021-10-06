@@ -2,7 +2,7 @@ import {AccessToken} from '@twurple/auth';
 import Store from 'tauri-plugin-store-api';
 import create from 'solid-zustand';
 import {persist, StateStorage} from 'zustand/middleware';
-import { tauri } from '@tauri-apps/api';
+import {tauri} from '@tauri-apps/api';
 
 const STORE = new Store('.settings.dat');
 const storeWrapper: StateStorage = {
@@ -19,7 +19,7 @@ export interface Settings {
   setToken: (token: AccessToken) => void;
   getToken: () => AccessToken | null;
   eraseToken: () => void;
-};
+}
 
 const useSettings = create<Settings>(
   persist(
@@ -41,7 +41,7 @@ const useSettings = create<Settings>(
       },
       eraseToken: () => {
         set({twitchAccessToken: null}, true);
-      }
+      },
     }),
     {
       name: 'stfu-storage',
@@ -50,7 +50,7 @@ const useSettings = create<Settings>(
   ),
 );
 
-// @ts-expect-error
+// @ts-expect-error FIXME: remove this when stuff works
 window.settings = useSettings();
 
 export default useSettings;

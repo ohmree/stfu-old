@@ -66,35 +66,36 @@ const Login: Component = () => {
           Shut yo bitch ass up
         </h1>
         <div flex="~" align="items-center" m="t-6 -x-2">
-            <button
-              type="button"
-              flex="~"
-              align="items-center"
-              justify="center"
-              w="full"
-              p="x-6 y-2"
-              m="x-2"
-              text="sm white"
-              font="medium"
-              transition="colors duration-200"
-              transform="~"
-              bg="purple-600 hover:purple-500 focus:purple-500"
-              border="rounded-md"
-              outline="focus:none"
-              onClick={() => {
-                let location = document.location.href;
-                if (!location.endsWith('/')) {
-                  location += '/';
-                }
-                void tauri.invoke('save_location', {location});
-                document.location.replace(authUrl);
-              }}
-            >
-              <Fa icon={faTwitch} w="4" h="4" m="x-2" />
-              <span m="x-2" display="hidden sm:inline">
-                Sign in with Twitch
-              </span>
-            </button>
+          <button
+            type="button"
+            flex="~"
+            align="items-center"
+            justify="center"
+            w="full"
+            p="x-6 y-2"
+            m="x-2"
+            text="sm white"
+            font="medium"
+            transition="colors duration-200"
+            transform="~"
+            bg="purple-600 hover:purple-500 focus:purple-500"
+            border="rounded-md"
+            outline="focus:none"
+            onClick={() => {
+              let location = document.location.href;
+              if (!location.endsWith('/')) {
+                location += '/';
+              }
+
+              void tauri.invoke('save_location', {location});
+              document.location.replace(authUrl);
+            }}
+          >
+            <Fa icon={faTwitch} w="4" h="4" m="x-2" />
+            <span m="x-2" display="hidden sm:inline">
+              Sign in with Twitch
+            </span>
+          </button>
         </div>
       </div>
     </Show>
