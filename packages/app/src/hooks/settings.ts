@@ -40,7 +40,7 @@ const useSettings = create<Settings>(
         return null;
       },
       eraseToken: () => {
-        set({twitchAccessToken: null}, true);
+        set({twitchAccessToken: null});
       },
     }),
     {
