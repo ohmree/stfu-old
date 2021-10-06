@@ -34,7 +34,10 @@ const authUrl = `https://id.twitch.tv/oauth2/authorize${stringify(
 
 const Login: Component = () => {
   const settings = useSettings();
-  void event.listen('stfu://token', ({payload}) => {
+  if (!settings.getToken()) {
+    void tauri.invoke('emit_auth_fragment');
+  }
+  void event.once('stfu://token', ({payload}) => {
     console.debug(payload);
     const fragment: ImplicitFlowFragment = parse(
       payload as string,

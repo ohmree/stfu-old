@@ -10,7 +10,8 @@ if (window.rpc) {
     void event.once('stfu://navigate', ({payload: url}) => {
       document.location.replace(url as string);
     });
-    void event.emit('stfu://token', hash);
+    // void event.emit('stfu://token', hash);
+    void tauri.invoke('save_auth_fragment', {fragment: hash});
     void tauri.invoke('restore_location');
     // Document.location.replace(`${document.location.pathname}#token_retrieved`);
   } else {
