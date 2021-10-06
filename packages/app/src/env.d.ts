@@ -5,7 +5,8 @@ import {AttributifyAttributes} from 'windicss/types/jsx';
 declare module 'solid-js' {
   namespace JSX {
     interface HTMLAttributes<T> extends AttributifyAttributes {}
-    interface SvgSVGAttributes<T> extends Omit<AttributifyAttributes, 'opacity' | 'overflow'> {}
+    interface SvgSVGAttributes<T>
+      extends Omit<AttributifyAttributes, 'opacity' | 'overflow'> {}
     // HACK: workaround for `solid-fa`.
     interface IntrinsicAttributes extends Omit<AttributifyAttributes, 'icon'> {}
   }

@@ -3,5 +3,8 @@ import htmlMinimize from '@sergeymakinen/vite-plugin-html-minimize';
 
 export default defineConfig({
   plugins: [htmlMinimize()],
-  base: '/stfu/'
+  base: '/stfu/',
+  server: {
+    port: 4000
+  }
 })

@@ -4,12 +4,10 @@ import {Router} from 'solid-app-router';
 import App from './app';
 
 render(
-  () => {
-    return (
-      <Router>
-        <App />
-      </Router>
-    );
-  },
+  () => (
+    <Router>
+      <App />
+    </Router>
+  ),
   document.querySelector('#app')!,
 );

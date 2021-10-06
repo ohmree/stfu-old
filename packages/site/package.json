@@ -16,6 +16,7 @@
     "vite": "^2.6.2"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.0.0-beta.8"
+    "@tauri-apps/api": "^1.0.0-beta.8",
+    "solid-app-router": "^0.1.7"
   }
 }
