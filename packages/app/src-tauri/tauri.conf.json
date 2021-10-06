@@ -62,7 +62,7 @@
       }
     ],
     "security": {
-      "csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self'; img-src 'self'; script-src 'self' tauri: data: blob: https://*.twitch.tv/*;"
+      "csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self'; img-src 'self'; script-src 'self' http://localhost:4000/stfu/node_modules/.vite/chunk-*.js.map;"
     }
   }
 }

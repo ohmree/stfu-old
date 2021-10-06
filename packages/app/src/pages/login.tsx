@@ -2,9 +2,9 @@ import {Component, Show} from 'solid-js';
 import {Fa} from 'solid-fa';
 import {faTwitch} from '@fortawesome/free-brands-svg-icons';
 import {parse, stringify} from '@d-fischer/qs';
-import {event, tauri} from '@tauri-apps/api';
+import {tauri} from '@tauri-apps/api';
 import {Navigate} from 'solid-app-router';
-import useSettings from '../hooks/settings';
+import useSettings, {Settings} from '../hooks/settings';
 
 interface AuthorizeParameters {
   response_type: string;
@@ -32,19 +32,14 @@ const authUrl = `https://id.twitch.tv/oauth2/authorize${stringify(
   {addQueryPrefix: true},
 )}`;
 
-const Login: Component = () => {
-  const settings = useSettings();
-  if (!settings.getToken()) {
-    void tauri.invoke('emit_auth_fragment');
-  }
-  void event.once('stfu://token', ({payload}) => {
-    console.debug(payload);
-    const fragment: ImplicitFlowFragment = parse(
-      payload as string,
+function createFragmentParser(settings: Settings) {
+  return (fragment: unknown) => {
+    const parsedFragment: ImplicitFlowFragment = parse(
+      fragment as string,
     ) as ImplicitFlowFragment;
 
-    const {access_token: accessToken} = fragment;
-    const scope = fragment.scope.split(' ');
+    const {access_token: accessToken} = parsedFragment;
+    const scope = parsedFragment.scope.split(' ');
     settings.setToken({
       accessToken,
       refreshToken: null,
@@ -52,9 +47,21 @@ const Login: Component = () => {
       scope,
       obtainmentTimestamp: Date.now(),
     });
-  });
+  };
+}
+
+const Login: Component = () => {
+  const settings = useSettings();
+  const token = settings.getToken();
+  if (!token) {
+    void tauri
+      .invoke('emit_auth_fragment')
+      .then(createFragmentParser(settings))
+      .catch(() => undefined);
+  }
+
   return (
-    <Show when={!settings.getToken()} fallback={<Navigate href="/" />}>
+    <Show when={!token} fallback={<Navigate href="/" />}>
       <div
         pos="relative top-2/5"
         w="full"

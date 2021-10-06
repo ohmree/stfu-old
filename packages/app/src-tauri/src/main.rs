@@ -3,12 +3,13 @@
     windows_subsystem = "windows"
 )]
 
-use tauri::{AppHandle, Manager};
 use tauri_plugin_store::Store;
 use once_cell::unsync::Lazy;
 
 static mut PREVIOUS_LOCATION: Lazy<Option<String>> = Lazy::new(|| None);
 static mut AUTH_FRAGMENT: Lazy<Option<String>> = Lazy::new(|| None);
+
+// TODO: maybe make these a bit more DRY
 
 #[tauri::command]
 fn save_location(location: String) {
@@ -18,16 +19,13 @@ fn save_location(location: String) {
 }
 
 #[tauri::command]
-fn restore_location(app: AppHandle) -> tauri::Result<()> {
+fn restore_location() -> Option<String> {
     let mut location: Option<String> = None;
     unsafe {
         std::mem::swap(&mut location, &mut PREVIOUS_LOCATION);
     }
-    if let Some(location) = dbg!(location) {
-        app.emit_all("stfu://navigate", location)
-    } else {
-        Ok(())
-    }
+
+    location
 }
 
 #[tauri::command]
@@ -38,17 +36,13 @@ fn save_auth_fragment(fragment: String) {
 }
 
 #[tauri::command]
-fn emit_auth_fragment(app: AppHandle) -> tauri::Result<()> {
+fn emit_auth_fragment() -> Option<String> {
     let mut fragment: Option<String> = None;
     unsafe {
         std::mem::swap(&mut fragment, &mut AUTH_FRAGMENT);
     }
 
-    if let Some(fragment) = dbg!(fragment) {
-        app.emit_all("stfu://token", fragment)
-    } else {
-        Ok(())
-    }
+    fragment
 }
 
 #[tauri::command]

@@ -50,7 +50,4 @@ const useSettings = create<Settings>(
   ),
 );
 
-// @ts-expect-error FIXME: remove this when stuff works
-window.settings = useSettings();
-
 export default useSettings;
